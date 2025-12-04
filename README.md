@@ -17,4 +17,14 @@ Este repositorio contiene una demo real de cómo usar **Packer** para crear una
 packer fmt .
 packer validate packer/main.pkr.hcl
 packer build packer/main.pkr.hcl
+
+aws ec2 run-instances \
+  --image-id $AMI_ID \
+  --instance-type t2.micro \
+  --security-group-id rules-sg-demo-http \
+  --associate-public-ip-address \
+  --profile $PROFILE \
+  --region us-west-2
+
+aws ec2 terminate-instances --instance-ids $INSTANCE_ID
 ```
