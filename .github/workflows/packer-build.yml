@@ -42,3 +42,15 @@ jobs:
       - name: Build
         working-directory: packer
         run: packer build main.pkr.hcl
+
+      - name: Append manifest to inventory
+        run: |
+          mkdir -p inventory
+          cp packer/manifest.json inventory/ami-$(date +%F).json
+
+      - name: Commit inventory
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Add AMI manifest for $(date +%F)"
+          branch: main
+          file_pattern: "inventory/*"
