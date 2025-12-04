@@ -16,7 +16,7 @@ jobs:
       - name: Setup Packer
         uses: hashicorp/setup-packer@v3
         with:
-          packer_version: latest
+          version:: latest
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -39,5 +39,6 @@ jobs:
         working-directory: packer
         run: packer fmt -check .
 
-      # - name: Build
-      #   run: packer build packer/main.pkr.hcl
+      - name: Build
+        working-directory: packer
+        run: packer build main.pkr.hcl
