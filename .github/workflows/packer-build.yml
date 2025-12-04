@@ -25,11 +25,19 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-2
 
-      - name: Format
-        run: packer fmt -check .
+      - name: Init Packer plugins
+        working-directory: packer
+        run: |
+          packer init .
 
-      - name: Validate
-        run: packer validate packer/main.pkr.hcl
+      - name: Validate template
+        working-directory: packer
+        run: |
+          packer validate .
+
+      - name: Format
+        working-directory: packer
+        run: packer fmt -check .
 
       # - name: Build
       #   run: packer build packer/main.pkr.hcl
