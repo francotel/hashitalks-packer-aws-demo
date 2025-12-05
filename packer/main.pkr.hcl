@@ -18,7 +18,7 @@ variable "instance_type" {
 }
 
 source "amazon-ebs" "ubuntu" {
-  ami_name      =       "ami-navidad-sin-drama-{{timestamp}}"
+  ami_name      = "ami-navidad-sin-drama-{{timestamp}}"
   instance_type = var.instance_type
   region        = var.region
 
